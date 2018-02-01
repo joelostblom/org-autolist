@@ -81,7 +81,7 @@ automatically insert new list items.
   ;; there is an exception if we're on a URL in a list item, and
   ;; `org-return-follows-link` is enabled -- in this case, we should just let
   ;; org mode default to following the link.
-  (if (and (org-at-item-p)
+  (if (and (org-in-item-p)
            (not
             (and org-return-follows-link
                  (eq 'org-link (get-text-property (point) 'face)))))
@@ -99,7 +99,7 @@ automatically insert new list items.
         ;; depending on the type of list we're dealing with.
         (cond
          ;; If we're on a checkbox item, then insert a new checkbox
-         ((org-at-item-checkbox-p)
+         ((org-in-item-checkbox-p)
           (org-insert-todo-heading nil))
 
          ;; If we're in a description list, and the point is between the start
@@ -108,7 +108,7 @@ automatically insert new list items.
          ;; w/ the UX for other list types, but we do this b/c `org-meta-return'
          ;; has some very strange behavior when executed in the middle of a
          ;; description list.
-         ((and (org-at-item-description-p)
+         ((and (org-in-item-description-p)
                (> (point) (org-autolist-beginning-of-item-after-bullet))
                (< (point) (line-end-position)))
           (newline))
